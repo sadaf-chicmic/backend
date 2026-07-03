@@ -13,259 +13,259 @@ const options = {
         url: 'http://localhost:3000',
         description: 'Development Server',
       },
+      {
+        url: 'https://student-api-4ykm.onrender.com',
+        description: 'Hosted Version',
+      },
     ],
     components: {
       schemas: {
         Student: {
-          type: "object",
+          type: 'object',
           properties: {
             id: {
-              type: "integer"
+              type: 'integer',
             },
             name: {
-              type: "string"
+              type: 'string',
             },
             age: {
-              type: "integer"
+              type: 'integer',
             },
             course: {
-              type: "string"
-            }
-          }
-        }
-      }
+              type: 'string',
+            },
+          },
+        },
+      },
     },
     paths: {
-      "/students": {
-        "get": {
-          "summary": "Get all students",
-          "responses": {
-            "200": {
-              "description": "A list of students",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
+      '/students': {
+        get: {
+          summary: 'Get all students',
+          responses: {
+            200: {
+              description: 'A list of students',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: {
+                        type: 'boolean',
                       },
-                      "message": {
-                        "type": "string"
+                      message: {
+                        type: 'string',
                       },
-                      "count": {
-                        "type": "integer"
+                      count: {
+                        type: 'integer',
                       },
-                      "data": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/Student"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new student",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
+                      data: {
+                        type: 'array',
+                        items: {
+                          $ref: '#/components/schemas/Student',
+                        },
+                      },
                     },
-                    "age": {
-                      "type": "integer"
-                    },
-                    "course": {
-                      "type": "string"
-                    }
                   },
-                  "required": [
-                    "name",
-                    "age",
-                    "course"
-                  ]
-                }
-              }
-            }
+                },
+              },
+            },
           },
-          "responses": {
-            "201": {
-              "description": "Student created successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
+        },
+        post: {
+          summary: 'Create a new student',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                    age: {
+                      type: 'integer',
+                    },
+                    course: {
+                      type: 'string',
+                    },
+                  },
+                  required: ['name', 'age', 'course'],
+                },
+              },
+            },
+          },
+          responses: {
+            201: {
+              description: 'Student created successfully',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: {
+                        type: 'boolean',
                       },
-                      "message": {
-                        "type": "string"
+                      message: {
+                        type: 'string',
                       },
-                      "data": {
-                        "$ref": "#/components/schemas/Student"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                      data: {
+                        $ref: '#/components/schemas/Student',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
-      "/students/{id}": {
-        "get": {
-          "summary": "Get student by ID",
-          "parameters": [
+      '/students/{id}': {
+        get: {
+          summary: 'Get student by ID',
+          parameters: [
             {
-              "in": "path",
-              "name": "id",
-              "required": true,
-              "schema": {
-                "type": "integer"
+              in: 'path',
+              name: 'id',
+              required: true,
+              schema: {
+                type: 'integer',
               },
-              "description": "The student ID"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Student fetched successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "$ref": "#/components/schemas/Student"
-                      }
-                    }
-                  }
-                }
-              }
+              description: 'The student ID',
             },
-            "404": {
-              "description": "Student not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update student by ID",
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "required": true,
-              "schema": {
-                "type": "integer"
-              },
-              "description": "The student ID"
-            }
           ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
+          responses: {
+            200: {
+              description: 'Student fetched successfully',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: {
+                        type: 'boolean',
+                      },
+                      message: {
+                        type: 'string',
+                      },
+                      data: {
+                        $ref: '#/components/schemas/Student',
+                      },
                     },
-                    "age": {
-                      "type": "integer"
-                    },
-                    "course": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+                  },
+                },
+              },
+            },
+            404: {
+              description: 'Student not found',
+            },
           },
-          "responses": {
-            "200": {
-              "description": "Student updated successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "$ref": "#/components/schemas/Student"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Student not found"
-            }
-          }
         },
-        "delete": {
-          "summary": "Delete student by ID",
-          "parameters": [
+        put: {
+          summary: 'Update student by ID',
+          parameters: [
             {
-              "in": "path",
-              "name": "id",
-              "required": true,
-              "schema": {
-                "type": "integer"
+              in: 'path',
+              name: 'id',
+              required: true,
+              schema: {
+                type: 'integer',
               },
-              "description": "The student ID"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Student deleted successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "$ref": "#/components/schemas/Student"
-                      }
-                    }
-                  }
-                }
-              }
+              description: 'The student ID',
             },
-            "404": {
-              "description": "Student not found"
-            }
-          }
-        }
-      }
-    }
+          ],
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    name: {
+                      type: 'string',
+                    },
+                    age: {
+                      type: 'integer',
+                    },
+                    course: {
+                      type: 'string',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: 'Student updated successfully',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: {
+                        type: 'boolean',
+                      },
+                      message: {
+                        type: 'string',
+                      },
+                      data: {
+                        $ref: '#/components/schemas/Student',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            404: {
+              description: 'Student not found',
+            },
+          },
+        },
+        delete: {
+          summary: 'Delete student by ID',
+          parameters: [
+            {
+              in: 'path',
+              name: 'id',
+              required: true,
+              schema: {
+                type: 'integer',
+              },
+              description: 'The student ID',
+            },
+          ],
+          responses: {
+            200: {
+              description: 'Student deleted successfully',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: {
+                        type: 'boolean',
+                      },
+                      message: {
+                        type: 'string',
+                      },
+                      data: {
+                        $ref: '#/components/schemas/Student',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            404: {
+              description: 'Student not found',
+            },
+          },
+        },
+      },
+    },
   },
 
   apis: [], // Scan route files for documentation
