@@ -1,10 +1,11 @@
 backend/
 │
 ├── src/
-│   ├── controllers/       ->
+│   ├── controllers/
 │   ├── routes/
 │   ├── services/
 │   ├── models/
+│   ├── data/
 │   ├── middlewares/
 │   ├── utils/
 │   ├── config/
