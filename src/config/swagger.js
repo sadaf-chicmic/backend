@@ -15,6 +15,14 @@ const options = {
       },
     ],
     components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'authorization',
+          description: 'Enter "sadaf" to authorize requests',
+        },
+      },
       schemas: {
         Student: {
           type: "object",
@@ -29,6 +37,31 @@ const options = {
               type: "integer"
             },
             course: {
+              type: "string"
+            }
+          }
+        },
+        ErrorResponse: {
+          type: "object",
+          properties: {
+            success: {
+              type: "boolean"
+            },
+            message: {
+              type: "string"
+            }
+          }
+        },
+        ValidationErrorResponse: {
+          type: "object",
+          properties: {
+            success: {
+              type: "boolean"
+            },
+            message: {
+              type: "string"
+            },
+            error: {
               type: "string"
             }
           }
@@ -71,6 +104,11 @@ const options = {
         },
         "post": {
           "summary": "Create a new student",
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -118,6 +156,26 @@ const options = {
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Validation error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
             }
           }
         }
@@ -125,6 +183,11 @@ const options = {
       "/students/{id}": {
         "get": {
           "summary": "Get student by ID",
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
           "parameters": [
             {
               "in": "path",
@@ -158,13 +221,35 @@ const options = {
                 }
               }
             },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
             "404": {
-              "description": "Student not found"
+              "description": "Student not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
             }
           }
         },
         "put": {
           "summary": "Update student by ID",
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
           "parameters": [
             {
               "in": "path",
@@ -219,13 +304,45 @@ const options = {
                 }
               }
             },
+            "400": {
+              "description": "Validation error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
             "404": {
-              "description": "Student not found"
+              "description": "Student not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
             }
           }
         },
         "delete": {
           "summary": "Delete student by ID",
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
           "parameters": [
             {
               "in": "path",
@@ -259,8 +376,35 @@ const options = {
                 }
               }
             },
+            "400": {
+              "description": "Validation error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
             "404": {
-              "description": "Student not found"
+              "description": "Student not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
             }
           }
         }
